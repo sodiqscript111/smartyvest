@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { CheckCircle, ShieldCheck, BarChart3, Users, TrendingUp, Lock } from "lucide-react";
 import { motion } from "framer-motion";
-import { KeenSliderInstance, useKeenSlider } from "keen-slider/react";
+import { useKeenSlider } from "keen-slider/react";
+
 import "keen-slider/keen-slider.min.css";
 
 const benefits = [
@@ -44,10 +45,8 @@ const benefits = [
 ];
 
 export default function WhyInvestWithUs() {
-  // State to detect small screen to enable slider only on mobile
   const [isMobile, setIsMobile] = useState(false);
 
-  // Setup a media query listener to toggle slider based on screen width
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 767px)");
     setIsMobile(mediaQuery.matches);
@@ -56,15 +55,11 @@ export default function WhyInvestWithUs() {
     return () => mediaQuery.removeEventListener("change", handler);
   }, []);
 
-  // Initialize keen-slider only if mobile
-  const [sliderRef] = useKeenSlider<HTMLDivElement>(
-    {
-      slides: { perView: 1.1, spacing: 16 },
-      loop: false,
-      mode: "snap",
-    },
-    []
-  );
+  const [sliderRef] = useKeenSlider<HTMLDivElement>({
+    slides: { perView: 1.1, spacing: 16 },
+    loop: false,
+    mode: "snap",
+  });
 
   return (
     <section className="bg-white py-20 px-6 sm:px-12 text-gray-900 max-w-[1100px] mx-auto">
@@ -88,7 +83,6 @@ export default function WhyInvestWithUs() {
       </motion.div>
 
       {isMobile ? (
-        // Mobile slider version
         <div ref={sliderRef} className="keen-slider">
           {benefits.map(({ icon: Icon, title, description }, index) => (
             <motion.div
@@ -108,7 +102,6 @@ export default function WhyInvestWithUs() {
           ))}
         </div>
       ) : (
-        // Desktop grid version
         <motion.div
           initial="hidden"
           whileInView="visible"

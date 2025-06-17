@@ -8,6 +8,8 @@ import {
   FileCheck,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
+
 import { Link } from "react-router-dom";
 
 const cardData = [
@@ -49,7 +51,8 @@ const cardData = [
   },
 ];
 
-const cardVariants = {
+// Explicitly type cardVariants as Variants
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
     opacity: 1,

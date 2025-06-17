@@ -13,7 +13,7 @@ function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white text-gray-900">
+    <header className="bg-white text-gray-900" style={{ fontFamily: "'Poppins', sans-serif" }}>
       {/* Navigation Bar */}
       <div className="container mx-auto flex justify-between items-center p-4 border-b border-gray-200">
         {/* Logo and Company Name */}
@@ -124,14 +124,18 @@ function Header() {
             <br />
             with smart investments
           </h1>
-          <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-            We proudly present an exhibition of works by artists who represent
-            the zeitgeist of contemporary African artworks, carefully excerpted
-            from the generously loaned private collection of Mr. Aigboje
-            Aig-Imoukhuede.
+
+          {/* Subheading */}
+          <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">
+            Future-Proof Your <span className="text-[#4faee4]">Finances</span>: Save, <span className="text-[#4faee4]">Invest</span>, Earn More
+          </h2>
+
+          {/* Paragraph */}
+          <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-md mx-auto lg:mx-0">
+            Discover cutting-edge ways to grow your <span className="text-[#4faee4] font-semibold">wealth</span>. With our innovative solutions, you can confidently <span className="text-[#4faee4] font-semibold">save</span>, wisely <span className="text-[#4faee4] font-semibold">invest</span>, and actively <span className="text-[#4faee4] font-semibold">earn</span>, propelling your finances forward.
           </p>
 
-          {/* Learn More Button - Routes to Coming Soon */}
+          {/* Learn More Button */}
           <Link to="/coming-soon">
             <Button className="bg-[#4faee4] hover:bg-[#3da4d4] text-white px-6 py-3 rounded-md flex items-center gap-2 transition-all duration-300 mx-auto lg:mx-0">
               Learn More <ArrowRight className="w-4 h-4" />

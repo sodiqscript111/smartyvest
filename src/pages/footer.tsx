@@ -21,7 +21,7 @@ export default function FullPageFooter() {
         {/* Branding & Description */}
         <div className="flex flex-col max-w-md space-y-8">
           <h2 className="text-4xl font-extrabold text-[#4faee4] tracking-tight">
-            InvestSmart
+            SmartyVest
           </h2>
           <p className="text-lg text-gray-600 leading-relaxed">
             Empowering you to build wealth with confidence through innovative and tailored investment solutions crafted just for you.

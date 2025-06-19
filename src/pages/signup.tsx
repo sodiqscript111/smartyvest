@@ -1,124 +1,242 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { ArrowRight, Sparkles, Users, Shield, TrendingUp, Globe, Star } from "lucide-react";
 
-export default function SignUpForm() {
-  const [dob, setDob] = useState<Date | undefined>(undefined);
+const floatingStats = [
+  { icon: Users, value: "10K+", label: "Active Users", delay: 0 },
+  { icon: TrendingUp, value: "₦2.5B+", label: "Invested", delay: 1000 },
+  { icon: Shield, value: "100%", label: "Secure", delay: 2000 },
+  { icon: Globe, value: "15+", label: "Countries", delay: 3000 },
+];
+
+const testimonialSnippets = [
+  "Game-changing platform!",
+  "Finally, investing made simple",
+  "The future is here",
+  "Smart money moves"
+];
+
+export default function EnhancedSignupIntro() {
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonialSnippets.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth) * 100,
+        y: (e.clientY / window.innerHeight) * 100,
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   return (
-    <section className="min-h-screen bg-[#f4fbfd] flex flex-col lg:flex-row">
-      {/* Left Content Section with Background Image and Gradient Overlay */}
-      <div
-        className="relative flex-1 bg-cover bg-center min-h-[320px] lg:min-h-auto"
-        style={{
-          backgroundImage: `url('https://i.ibb.co/848N3pnz/Gemini-Generated-Image-clzl49clzl49clzl.png')`,
-        }}
-      >
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
-
-        {/* Text Content */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative z-10 max-w-md mx-auto px-6 py-16 lg:py-20 text-white flex flex-col space-y-6 h-full flex justify-center"
-        >
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
-            Invest in Your Future
-          </h1>
-          <p className="text-base sm:text-lg leading-relaxed">
-            Take the first step toward financial independence. Join a community
-            of future-forward investors across Africa.
-          </p>
-        </motion.div>
+    <section className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex justify-center items-center px-6 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div 
+          className="absolute w-96 h-96 bg-gradient-to-r from-cyan-400/20 to-blue-500/20 rounded-full blur-3xl transition-transform duration-1000 ease-out"
+          style={{
+            transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
+            top: '10%',
+            left: '10%',
+          }}
+        />
+        <div 
+          className="absolute w-80 h-80 bg-gradient-to-r from-purple-400/15 to-pink-500/15 rounded-full blur-3xl transition-transform duration-1000 ease-out"
+          style={{
+            transform: `translate(${mousePosition.x * -0.01}px, ${mousePosition.y * -0.01}px)`,
+            bottom: '10%',
+            right: '10%',
+          }}
+        />
+        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/60 rounded-full animate-pulse" />
+        <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-cyan-400/80 rounded-full animate-ping" />
+        <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-blue-400/70 rounded-full animate-bounce" />
       </div>
 
-      {/* Right Form Section */}
-      <div className="flex flex-1 justify-center items-center px-6 py-12 lg:py-16">
-        <motion.form
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="bg-white rounded-xl shadow-xl w-full max-w-xl p-8 sm:p-10 space-y-8"
-        >
-          <div className="space-y-2 text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Create Your Account</h2>
-            <p className="text-gray-600 text-sm sm:text-base">
-              Let’s get started with a few personal details.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <Label htmlFor="firstName">First Name</Label>
-              <Input id="firstName" placeholder="e.g. Sodiq" />
-            </div>
-            <div>
-              <Label htmlFor="lastName">Last Name</Label>
-              <Input id="lastName" placeholder="e.g. Tobiloba" />
-            </div>
-          </div>
-
-          <div>
-            <Label htmlFor="email">Email Address</Label>
-            <Input id="email" type="email" placeholder="e.g. sodiq@email.com" />
-          </div>
-
-          <div>
-            <Label htmlFor="dob">Date of Birth</Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start text-left font-normal"
-                >
-                  {dob ? format(dob, "PPP") : <span>Pick a date</span>}
-                  <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={dob}
-                  onSelect={setDob}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-          </div>
-
-          <div>
-            <Label htmlFor="phone">Phone Number</Label>
-            <Input id="phone" type="tel" placeholder="e.g. +234 812 345 6789" />
-          </div>
-
-          <div>
-            <Label htmlFor="occupation">Occupation</Label>
-            <Input id="occupation" placeholder="e.g. Product Manager" />
-          </div>
-
-          <div>
-            <Label htmlFor="income">Annual Income</Label>
-            <Input id="income" type="number" placeholder="e.g. 7,500,000" />
-          </div>
-
-          <Button
-            type="submit"
-            className="w-full bg-[#4faee4] hover:bg-[#3b9fcf] transition-colors"
+      {/* Floating Stats */}
+      {floatingStats.map((stat, index) => {
+        const Icon = stat.icon;
+        return (
+          <div
+            key={index}
+            className="absolute hidden lg:block animate-float"
+            style={{
+              top: `${20 + (index * 15)}%`,
+              left: index % 2 === 0 ? '5%' : '90%',
+              animationDelay: `${stat.delay}ms`,
+              transform: index % 2 === 0 ? 'translateX(0)' : 'translateX(-100%)',
+            }}
           >
-            Sign Up
-          </Button>
-        </motion.form>
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 shadow-2xl hover:scale-110 transition-transform duration-300">
+              <div className="flex items-center gap-3 text-white">
+                <div className="p-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl">
+                  <Icon className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="font-bold text-lg">{stat.value}</div>
+                  <div className="text-xs opacity-80">{stat.label}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+
+      {/* Main Content Container */}
+      <div className="relative w-full max-w-7xl">
+        <div
+          className="relative w-full max-w-6xl mx-auto min-h-[700px] rounded-[40px] flex flex-col justify-center items-center px-8 sm:px-12 lg:px-16 text-center bg-cover bg-center shadow-2xl overflow-hidden"
+          style={{
+           
+          }}
+        >
+          {/* Enhanced Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/60 rounded-[40px]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-blue-900/30 to-transparent rounded-[40px]" />
+
+          {/* Floating testimonial */}
+          <div className="absolute top-8 right-8 hidden md:block">
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-2 shadow-lg">
+              <div className="flex items-center gap-2 text-white text-sm">
+                <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                <span className="italic">"{testimonialSnippets[currentTestimonial]}"</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="relative z-10 max-w-4xl space-y-8">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white font-medium shadow-lg animate-fade-in">
+              <Sparkles className="w-5 h-5 text-cyan-400" />
+              <span className="text-sm sm:text-base">Africa's Premier Investment Platform</span>
+            </div>
+
+            {/* Main Heading */}
+            <h1 className="text-white font-black leading-[0.85] tracking-tight animate-slide-up">
+              <span className="block text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
+                Your Financial
+              </span>
+              <span className="block text-4xl sm:text-5xl lg:text-6xl xl:text-7xl bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mt-2">
+                Future
+              </span>
+              <span className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white/90 mt-4">
+                Starts Here.
+              </span>
+            </h1>
+
+            {/* Enhanced Description */}
+            <div className="space-y-4 animate-fade-in-delayed">
+              <p className="text-white/90 text-lg sm:text-xl lg:text-2xl font-semibold max-w-3xl mx-auto leading-relaxed">
+                Join a vibrant community of{" "}
+                <span className="text-cyan-400 font-bold">forward-thinkers</span>{" "}
+                shaping Africa's investment landscape.
+              </p>
+              
+              <div className="flex flex-wrap justify-center gap-4 text-white/80 text-sm sm:text-base">
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                  <span className="font-medium">Smart</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+                  <span className="font-medium">Simple</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
+                  <span className="font-medium">Secure</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Enhanced CTA Section */}
+            <div className="space-y-6 pt-8 animate-slide-up-delayed">
+              <button className="group relative bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 hover:from-cyan-400 hover:via-blue-400 hover:to-purple-500 text-white px-12 py-5 rounded-2xl text-lg sm:text-xl font-bold shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-2">
+                <span className="flex items-center gap-3 relative z-10">
+                  Start Your Journey
+                  <ArrowRight className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-2" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl blur opacity-30 group-hover:opacity-70 transition-opacity duration-300" />
+              </button>
+
+              <p className="text-white/70 text-sm max-w-md mx-auto">
+                Join thousands of investors building wealth with confidence.{" "}
+                <span className="text-cyan-400 font-semibold">No hidden fees</span> • 
+                <span className="text-blue-400 font-semibold"> Start with ₦1,000</span>
+              </p>
+            </div>
+
+            {/* Social Proof */}
+            <div className="flex flex-wrap justify-center items-center gap-6 pt-8 text-white/60 text-sm animate-fade-in-delayed">
+              <div className="flex items-center gap-2">
+                <div className="flex -space-x-2">
+                  {[1,2,3,4].map((i) => (
+                    <div key={i} className="w-8 h-8 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full border-2 border-white/20 flex items-center justify-center text-xs font-bold">
+                      {String.fromCharCode(65 + i)}
+                    </div>
+                  ))}
+                </div>
+                <span className="font-medium">Trusted by 10,000+ investors</span>
+              </div>
+              <div className="hidden sm:block w-px h-4 bg-white/20" />
+              <div className="flex items-center gap-2">
+                <div className="flex">
+                  {[1,2,3,4,5].map((i) => (
+                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                <span className="font-medium">4.9/5 Rating</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      {/* Custom Styles */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slide-up {
+          from { opacity: 0; transform: translateY(50px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        .animate-fade-in {
+          animation: fade-in 0.8s ease-out forwards;
+        }
+        .animate-fade-in-delayed {
+          animation: fade-in 0.8s ease-out 0.3s forwards;
+          opacity: 0;
+        }
+        .animate-slide-up {
+          animation: slide-up 0.8s ease-out forwards;
+        }
+        .animate-slide-up-delayed {
+          animation: slide-up 0.8s ease-out 0.5s forwards;
+          opacity: 0;
+        }
+      `}</style>
     </section>
   );
 }

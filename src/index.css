@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 
 @custom-variant dark (&:is(.dark *));
@@ -118,5 +121,22 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Custom gradient animation for Tailwind v4 */
+@layer utilities {
+  @keyframes gradient-move {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .animate-gradient-move {
+    background-size: 200% 200%;
+    animation: gradient-move 8s ease infinite;
   }
 }

@@ -53,7 +53,7 @@ function Header() {
                 <NavigationMenuItem key={idx}>
                   <NavigationMenuLink asChild>
                     <Link
-                      to="/coming-soon"
+                      to="/register"
                       className="px-3 py-2 text-base text-gray-700 hover:text-[#4faee4] hover:bg-white/60 rounded-lg transition-all duration-200 backdrop-blur-sm"
                     >
                       {item}
@@ -65,19 +65,22 @@ function Header() {
           </NavigationMenu>
         </nav>
 
+        {/* Desktop CTA */}
         <div className="hidden md:block">
-          <Button className="bg-gradient-to-r from-[#4faee4] to-cyan-500 hover:from-[#3da4d4] hover:to-cyan-600 text-white px-6 py-2.5 rounded-lg font-semibold text-sm shadow-md hover:shadow-xl transition-transform hover:scale-105">
-            Join Us
-          </Button>
+          <Link to="/register">
+            <Button className="bg-gradient-to-r from-[#4faee4] to-cyan-500 hover:from-[#3da4d4] hover:to-cyan-600 text-white px-6 py-2.5 rounded-lg font-semibold text-sm shadow-md hover:shadow-xl transition-transform hover:scale-105">
+              Join Us
+            </Button>
+          </Link>
         </div>
 
+        {/* Mobile Buttons */}
         <div className="md:hidden flex items-center gap-2">
-          <Button
-            className="bg-gradient-to-r from-[#4faee4] to-cyan-500 text-white px-4 py-2 rounded-md"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Join Us
-          </Button>
+          <Link to="/register">
+            <Button className="bg-gradient-to-r from-[#4faee4] to-cyan-500 text-white px-4 py-2 rounded-md">
+              Join Us
+            </Button>
+          </Link>
           <button
             className="p-2 rounded-md hover:bg-gray-100"
             onClick={() => setMobileMenuOpen((open) => !open)}
@@ -87,13 +90,14 @@ function Header() {
         </div>
       </div>
 
+      {/* Mobile Nav Menu */}
       {mobileMenuOpen && (
         <nav className="md:hidden relative z-10 bg-white/80 backdrop-blur-md border-b border-gray-200/60 shadow-md">
           <ul className="flex flex-col space-y-1 px-6 py-4">
             {["About", "Product & Services", "Insights", "Contact Us"].map((item, idx) => (
               <li key={idx}>
                 <Link
-                  to="/coming-soon"
+                  to="/register"
                   className="block px-4 py-2 text-lg text-gray-700 hover:text-[#4faee4] hover:bg-white/60 rounded-md"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -147,13 +151,14 @@ function Header() {
             </div>
           </div>
 
-          <Link to="/coming-soon">
+          <Link to="/register">
             <Button className="mt-4 bg-gradient-to-r from-[#4faee4] to-cyan-500 hover:from-[#3da4d4] hover:to-cyan-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
               Get Started Today <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>
         </div>
 
+        {/* Illustration */}
         <div className="w-full lg:w-1/2 max-w-lg mx-auto relative">
           <div className="relative group">
             <div className="absolute -inset-4 bg-gradient-to-r from-[#4faee4]/30 to-cyan-500/30 rounded-2xl blur-2xl group-hover:blur-3xl transition-all duration-300"></div>

@@ -10,6 +10,7 @@ import {
   Globe,
   Star,
 } from "lucide-react";
+import { Link } from "react-router-dom"; 
 
 const floatingStats = [
   { icon: Users, value: "10K+", label: "Active Users", delay: 0 },
@@ -145,14 +146,17 @@ export default function EnhancedSignupIntro() {
         </p>
 
         {/* CTA */}
-        <button className="group relative bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 hover:from-cyan-400 hover:via-blue-400 hover:to-purple-500 text-white px-12 py-5 rounded-2xl text-lg font-bold shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-2">
-          <span className="flex items-center gap-3 relative z-10">
-            Start Your Journey
-            <ArrowRight className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-2" />
-          </span>
-          <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl blur opacity-30 group-hover:opacity-70 transition-opacity duration-300" />
-        </button>
+      
+<Link to="/register" className="group relative inline-block">
+  <div className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 hover:from-cyan-400 hover:via-blue-400 hover:to-purple-500 text-white px-12 py-5 rounded-2xl text-lg font-bold shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-2">
+    <span className="flex items-center gap-3 relative z-10">
+      Start Your Journey
+      <ArrowRight className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-2" />
+    </span>
+    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl blur opacity-30 group-hover:opacity-70 transition-opacity duration-300" />
+  </div>
+</Link>
 
         {/* Social Proof */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-center gap-4 pt-8 text-white/60 text-sm">
@@ -177,7 +181,7 @@ export default function EnhancedSignupIntro() {
       </div>
 
       {/* Styles */}
-      <style >{`
+      <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-20px); }

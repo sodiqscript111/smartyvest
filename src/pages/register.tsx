@@ -1,6 +1,5 @@
 "use client";
-
-import React, { useState } from "react";
+import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { Eye, EyeOff, CheckCircle, XCircle, Loader2 } from "lucide-react";
 

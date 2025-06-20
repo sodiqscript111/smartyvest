@@ -3,7 +3,7 @@
 import { useState } from "react";
 import {
   CheckCircle,
-  ShieldCheck,
+
   BarChart3,
   Users,
   TrendingUp,
@@ -15,40 +15,39 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const benefits = [
   {
-    icon: ShieldCheck,
-    title: "Robust Security",
-    description:
-      "Your investments are protected with bank-grade encryption and multi-layer security protocols.",
-  },
-  {
-    icon: BarChart3,
-    title: "Expert Insights",
-    description:
-      "Gain access to data-driven research and market insights tailored for Africa's unique economic landscape.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Consistent Growth",
-    description:
-      "Our investment strategies are designed to deliver sustainable and long-term wealth accumulation.",
+    icon: Users,
+    title: "Join a growing community of like-minded investors.",
+    description: "Share insights and opportunities.",
   },
   {
     icon: Users,
-    title: "Dedicated Support",
-    description:
-      "Our experienced advisors are ready to guide you through every step of your investment journey.",
+    title: "Community Focused",
+    description: "Join a growing community of like-minded investors. Share insights and opportunities.",
   },
   {
-    icon: Lock,
-    title: "Transparency & Trust",
-    description:
-      "Full visibility on your portfolio performance with clear, easy-to-understand reporting.",
+    icon: BarChart3,
+    title: "Portfolio Diversification",
+    description: "Hassle-Free Ownership",
+  },
+  {
+    icon: TrendingUp,
+    title: "High Potential Returns",
+    description: "Benefit from rental income and property appreciation. Target double-digit annual returns.",
   },
   {
     icon: CheckCircle,
-    title: "Tailored Solutions",
-    description:
-      "Customized investment options that align with your goals and risk appetite.",
+    title: "We handle property management, so you can enjoy passive income without the stress.",
+    description: "All properties are vetted. Track your investments and earnings through our secure platform.",
+  },
+  {
+    icon: Lock,
+    title: "Secure & Transparent",
+    description: "All properties are vetted. Track your investments and earnings through our secure platform.",
+  },
+  {
+    icon: CheckCircle,
+    title: "Low Minimum Investment",
+    description: "",
   },
 ];
 

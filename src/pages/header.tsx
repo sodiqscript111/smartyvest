@@ -117,16 +117,11 @@ function Header() {
             <span>The Future of Smart Investing</span>
           </div>
 
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1] tracking-tight text-gray-900">
-            <span className="block">Build your</span>
-            <span className="block bg-gradient-to-r from-[#4faee4] via-cyan-500 to-blue-600 bg-clip-text text-transparent">
-              future
-            </span>
-            <span className="block text-4xl font-bold text-gray-700 mt-2">
-              with smart money moves
-            </span>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight tracking-tight text-gray-900 max-w-3xl">
+            Together, we create the community we want to see.
           </h1>
 
+          {/* Dynamic rotating text */}
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
             You deserve to{" "}
             <span className="italic font-extrabold bg-gradient-to-r from-[#4faee4] to-cyan-600 bg-clip-text text-transparent transition-opacity duration-500">
@@ -134,10 +129,8 @@ function Header() {
             </span>
           </h2>
 
-          <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-xl mx-auto lg:mx-0 font-medium">
-            We're building the future of finance — designed for{" "}
-            <span className="text-[#4faee4] font-semibold">Gen Z & Millennials</span>. Automate your savings, co-invest in projects, and join a
-            community that's rewriting the rules.
+          <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-xl mx-auto lg:mx-0 font-medium mt-4">
+            We help you Access high-yield real estate investments with small capital. Diversify your portfolio, watch your wealth grow and own properties.
           </p>
 
           <div className="flex flex-wrap gap-3 justify-center lg:justify-start">

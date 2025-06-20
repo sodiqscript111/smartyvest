@@ -13,9 +13,10 @@ function MainSite() {
   return (
     <>
       <Header />
+      <WhyInvestWithUs />
       <ProductsAndSolutions />
       <SignUpForm />
-      <WhyInvestWithUs />
+      
       <Footer />
     </>
   );

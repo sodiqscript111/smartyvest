@@ -1,11 +1,8 @@
 import {
   ArrowRight,
-  ShieldCheck,
-  BarChart3,
-  Briefcase,
-  Banknote,
-  UserCircle2,
-  FileCheck,
+  BookOpen,
+  Calendar,
+  Video,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
@@ -14,44 +11,22 @@ import { Link } from "react-router-dom";
 
 const cardData = [
   {
-    title: "Individual Insurance",
-    icon: ShieldCheck,
-    description:
-      "Offers comprehensive insurance for your car, home, business, and life — with only one telephone call. Find out more & get a quote.",
+    title: "Learn | Save | Invest",
+    icon: BookOpen,
+    description: "All our upcoming events for the month of October to December",
   },
   {
-    title: "Securities Trading",
-    icon: BarChart3,
-    description:
-      "Make share trading decisions backed by the insights of Coronation’s research team.",
+    title: "Smarty Central",
+    icon: Calendar,
+    description: "Recommended courses, curated just for you!",
   },
   {
-    title: "Asset B. Management",
-    icon: Briefcase,
-    description:
-      "At Coronation Asset, we offer investment capabilities across traditional and alternative asset classes in line with our customers.",
-  },
-  {
-    title: "Wealth Management",
-    icon: UserCircle2,
-    description:
-      "Coronation Wealth Management offers a personal, proactive approach to managing your wealth. We take the time to get to know you.",
-  },
-  {
-    title: "Private Banking",
-    icon: Banknote,
-    description:
-      "With a deep understanding of the world you live in, our Private Banking team provides you with a range of bespoke and dedicated services to help.",
-  },
-  {
-    title: "Trustee and Registrar Services",
-    icon: FileCheck,
-    description:
-      "Coronation is a leading player in technology-enabled securities administration services. We are expert fiduciaries and providers of trust.",
+    title: "All available lesson recordings",
+    icon: Video,
+    description: "",
   },
 ];
 
-// Explicitly type cardVariants as Variants
 const cardVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
@@ -96,16 +71,17 @@ export default function ProductsAndSolutions() {
                 <card.icon className="text-[#4faee4] w-7 h-7" />
                 <h3 className="text-xl font-semibold">{card.title}</h3>
               </div>
-              <p className="text-base leading-relaxed text-gray-600">
-                {card.description}
-              </p>
+              {card.description && (
+                <p className="text-base leading-relaxed text-gray-600">
+                  {card.description}
+                </p>
+              )}
 
-              {/* React Router Link replacing button */}
               <Link
                 to="/coming-soon"
                 className="mt-auto text-[#4faee4] hover:underline flex items-center gap-1 text-sm font-medium"
               >
-                Learn more <ArrowRight className="w-4 h-4" />
+                Coming Soon <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
           ))}

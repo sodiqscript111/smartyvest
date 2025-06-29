@@ -1,8 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArrowRight, Menu as MenuIcon, X as CloseIcon, TrendingUp, Shield, Sparkles } from "lucide-react";
-import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@/components/ui/navigation-menu";
+import {
+  Menu as MenuIcon,
+  X as CloseIcon,
+  TrendingUp,
+  Shield,
+  Sparkles,
+} from "lucide-react";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -11,7 +22,7 @@ const dynamicPoints = [
   "invest with purpose.",
   "grow without limits.",
   "own your journey.",
-  "retire on your terms."
+  "retire on your terms.",
 ];
 
 function Header() {
@@ -38,7 +49,11 @@ function Header() {
       <div className="relative z-10 container mx-auto flex justify-between items-center p-4 border-b border-gray-200/60 backdrop-blur-sm">
         <Link to="/" className="flex items-center space-x-3">
           <div className="relative">
-            <img src="https://i.ibb.co/PvqWGDSX/Smartyvest1.png" alt="Smartyvest Logo" className="w-12 h-12 object-contain" />
+            <img
+              src="https://i.ibb.co/PvqWGDSX/Smartyvest1.png"
+              alt="Smartyvest Logo"
+              className="w-12 h-12 object-contain"
+            />
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-[#4faee4] to-cyan-400 rounded-full animate-pulse"></div>
           </div>
           <span className="text-2xl font-black tracking-tight bg-gradient-to-r from-[#4faee4] to-cyan-600 bg-clip-text text-transparent select-none">
@@ -49,18 +64,20 @@ function Header() {
         <nav className="hidden md:flex space-x-6">
           <NavigationMenu>
             <NavigationMenuList className="flex space-x-6">
-              {["About", "Product & Services", "Insights", "Contact Us"].map((item, idx) => (
-                <NavigationMenuItem key={idx}>
-                  <NavigationMenuLink asChild>
-                    <Link
-                      to="/register"
-                      className="px-3 py-2 text-base text-gray-700 hover:text-[#4faee4] hover:bg-white/60 rounded-lg transition-all duration-200 backdrop-blur-sm"
-                    >
-                      {item}
-                    </Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              ))}
+              {["About", "Product & Services", "Insights", "Contact Us"].map(
+                (item, idx) => (
+                  <NavigationMenuItem key={idx}>
+                    <NavigationMenuLink asChild>
+                      <Link
+                        to="/register"
+                        className="px-3 py-2 text-base text-gray-700 hover:text-[#4faee4] hover:bg-white/60 rounded-lg transition-all duration-200 backdrop-blur-sm"
+                      >
+                        {item}
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                )
+              )}
             </NavigationMenuList>
           </NavigationMenu>
         </nav>
@@ -74,7 +91,7 @@ function Header() {
           </Link>
         </div>
 
-        {/* Mobile Buttons */}
+        {/* Mobile CTA */}
         <div className="md:hidden flex items-center gap-2">
           <Link to="/register">
             <Button className="bg-gradient-to-r from-[#4faee4] to-cyan-500 text-white px-4 py-2 rounded-md">
@@ -85,7 +102,11 @@ function Header() {
             className="p-2 rounded-md hover:bg-gray-100"
             onClick={() => setMobileMenuOpen((open) => !open)}
           >
-            {mobileMenuOpen ? <CloseIcon className="w-6 h-6 text-gray-700" /> : <MenuIcon className="w-6 h-6 text-gray-700" />}
+            {mobileMenuOpen ? (
+              <CloseIcon className="w-6 h-6 text-gray-700" />
+            ) : (
+              <MenuIcon className="w-6 h-6 text-gray-700" />
+            )}
           </button>
         </div>
       </div>
@@ -94,35 +115,37 @@ function Header() {
       {mobileMenuOpen && (
         <nav className="md:hidden relative z-10 bg-white/80 backdrop-blur-md border-b border-gray-200/60 shadow-md">
           <ul className="flex flex-col space-y-1 px-6 py-4">
-            {["About", "Product & Services", "Insights", "Contact Us"].map((item, idx) => (
-              <li key={idx}>
-                <Link
-                  to="/register"
-                  className="block px-4 py-2 text-lg text-gray-700 hover:text-[#4faee4] hover:bg-white/60 rounded-md"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item}
-                </Link>
-              </li>
-            ))}
+            {["About", "Product & Services", "Insights", "Contact Us"].map(
+              (item, idx) => (
+                <li key={idx}>
+                  <Link
+                    to="/register"
+                    className="block px-4 py-2 text-lg text-gray-700 hover:text-[#4faee4] hover:bg-white/60 rounded-md"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item}
+                  </Link>
+                </li>
+              )
+            )}
           </ul>
         </nav>
       )}
 
       {/* Hero Section */}
-      <div className="relative z-10 container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-16 py-20 px-6">
-        <div className="max-w-2xl space-y-8 text-center lg:text-left">
+      <div className="relative z-10 container mx-auto flex flex-col lg:flex-row items-center justify-between gap-16 py-20 px-6">
+        {/* Text Content */}
+        <div className="max-w-2xl space-y-8 text-left lg:text-left">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-[#4faee4]/20 rounded-full text-sm font-medium text-[#4faee4] shadow-sm">
             <Sparkles className="w-4 h-4" />
             <span>The Future of Smart Investing</span>
           </div>
 
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight tracking-tight text-gray-900 max-w-3xl">
+          <h1 className="text-[24px] sm:text-[44px] lg:text-[34px] font-black leading-tight tracking-tight text-gray-900 max-w-3xl">
             Together, we create the community we want to see.
           </h1>
 
-          {/* Dynamic rotating text */}
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
+          <h2 className="text-[28px] sm:text-[28px] font-bold text-gray-800">
             You deserve to{" "}
             <span className="italic font-extrabold bg-gradient-to-r from-[#4faee4] to-cyan-600 bg-clip-text text-transparent transition-opacity duration-500">
               {dynamicPoints[currentPoint]}
@@ -130,7 +153,9 @@ function Header() {
           </h2>
 
           <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-xl mx-auto lg:mx-0 font-medium mt-4">
-            We help you Access high-yield real estate investments with small capital. Diversify your portfolio, watch your wealth grow and own properties.
+            We help you Access high-yield real estate investments with small
+            capital. Diversify your portfolio, watch your wealth grow and own
+            properties.
           </p>
 
           <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
@@ -144,21 +169,27 @@ function Header() {
             </div>
           </div>
 
-          <Link to="/register">
-            <Button className="mt-4 bg-gradient-to-r from-[#4faee4] to-cyan-500 hover:from-[#3da4d4] hover:to-cyan-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-              Get Started Today <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-          </Link>
+          {/* CTA Email Input */}
+          <div className="mt-6 w-full max-w-xl flex flex-col sm:flex-row items-center gap-3 bg-white/60 backdrop-blur-sm p-2 rounded-xl shadow-lg border border-gray-200/60">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="flex-1 px-4 py-3 text-base rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#4faee4] bg-white/80 text-gray-800 placeholder-gray-500"
+            />
+            <button className="bg-gradient-to-r from-[#4faee4] to-cyan-500 hover:from-[#3da4d4] hover:to-cyan-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+              Sign Up
+            </button>
+          </div>
         </div>
 
-        {/* Illustration */}
+        {/* Illustration - No white background */}
         <div className="w-full lg:w-1/2 max-w-lg mx-auto relative">
           <div className="relative group">
             <div className="absolute -inset-4 bg-gradient-to-r from-[#4faee4]/30 to-cyan-500/30 rounded-2xl blur-2xl group-hover:blur-3xl transition-all duration-300"></div>
 
-            <div className="relative bg-white/80 backdrop-blur-sm p-4 rounded-2xl shadow-2xl">
+            <div className="relative rounded-2xl shadow-2xl">
               <img
-                src="https://i.ibb.co/BFcLmKw/globe-large-1x.webp"
+                src="https://i.ibb.co/VcjLKGw9/Chat-GPT-Image-Jun-29-2025-08-42-34-PM.png"
                 alt="Hero Illustration"
                 className="rounded-xl w-full object-cover shadow-lg"
               />

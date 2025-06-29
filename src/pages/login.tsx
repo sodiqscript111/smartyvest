@@ -3,12 +3,9 @@ import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { Eye, EyeOff, CheckCircle, XCircle, Loader2 } from "lucide-react";
 
-interface FormData {
-  first_name: string;
-  surname: string;
+interface LoginFormData {
   email: string;
   password: string;
-  phone: string;
 }
 
 interface Message {
@@ -16,13 +13,10 @@ interface Message {
   text: string;
 }
 
-export default function Register() {
-  const [form, setForm] = useState<FormData>({
-    first_name: "",
-    surname: "",
+export default function Login() {
+  const [form, setForm] = useState<LoginFormData>({
     email: "",
     password: "",
-    phone: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -45,12 +39,10 @@ export default function Register() {
 
     try {
       const response = await fetch(
-        "https://smartyvest-fzdscdgegme8h5hk.canadacentral-01.azurewebsites.net/register",
+        "https://smartyvest-fzdscdgegme8h5hk.canadacentral-01.azurewebsites.net/login",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(form),
         }
       );
@@ -58,19 +50,9 @@ export default function Register() {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage({
-          type: "success",
-          text: "Registration successful! Welcome to SmartyVest!",
-        });
-        setForm({
-          first_name: "",
-          surname: "",
-          email: "",
-          password: "",
-          phone: "",
-        });
+        setMessage({ type: "success", text: "Login successful! Welcome back!" });
+        setForm({ email: "", password: "" });
 
-        // Store token if available
         if (data.token) {
           localStorage.setItem("authToken", data.token);
           setToken(data.token);
@@ -78,7 +60,7 @@ export default function Register() {
       } else {
         setMessage({
           type: "error",
-          text: data.message || "Registration failed. Please try again.",
+          text: data.message || "Login failed. Please check your credentials.",
         });
       }
     } catch (error) {
@@ -86,7 +68,7 @@ export default function Register() {
         type: "error",
         text: "Network error. Please check your connection and try again.",
       });
-      console.error("Registration error:", error);
+      console.error("Login error:", error);
     } finally {
       setIsLoading(false);
     }
@@ -96,7 +78,7 @@ export default function Register() {
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 px-4 sm:px-6">
       <div className="w-full max-w-md bg-white/5 backdrop-blur-md p-6 sm:p-10 rounded-2xl shadow-2xl border border-white/10">
         <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6 text-center">
-          Create an Account
+          Log In
         </h2>
 
         {/* Message Display */}
@@ -130,34 +112,6 @@ export default function Register() {
           className="space-y-5 text-sm sm:text-base text-white"
         >
           <div>
-            <label className="block mb-1 font-medium">First Name</label>
-            <input
-              name="first_name"
-              type="text"
-              required
-              value={form.first_name}
-              onChange={handleChange}
-              placeholder="Enter first name"
-              disabled={isLoading}
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed text-white placeholder-white/50"
-            />
-          </div>
-
-          <div>
-            <label className="block mb-1 font-medium">Surname</label>
-            <input
-              name="surname"
-              type="text"
-              required
-              value={form.surname}
-              onChange={handleChange}
-              placeholder="Enter surname"
-              disabled={isLoading}
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed text-white placeholder-white/50"
-            />
-          </div>
-
-          <div>
             <label className="block mb-1 font-medium">Email</label>
             <input
               name="email"
@@ -165,7 +119,7 @@ export default function Register() {
               required
               value={form.email}
               onChange={handleChange}
-              placeholder="Enter email"
+              placeholder="Enter your email"
               disabled={isLoading}
               className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed text-white placeholder-white/50"
             />
@@ -179,7 +133,7 @@ export default function Register() {
               required
               value={form.password}
               onChange={handleChange}
-              placeholder="Enter password"
+              placeholder="Enter your password"
               disabled={isLoading}
               className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed text-white placeholder-white/50"
             />
@@ -194,20 +148,6 @@ export default function Register() {
             </button>
           </div>
 
-          <div>
-            <label className="block mb-1 font-medium">Phone Number</label>
-            <input
-              name="phone"
-              type="tel"
-              required
-              value={form.phone}
-              onChange={handleChange}
-              placeholder="e.g. 0803xxxxxxx"
-              disabled={isLoading}
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed text-white placeholder-white/50"
-            />
-          </div>
-
           <button
             type="submit"
             disabled={isLoading}
@@ -216,18 +156,18 @@ export default function Register() {
             {isLoading ? (
               <>
                 <Loader2 className="w-5 h-5 animate-spin" />
-                Creating Account...
+                Logging in...
               </>
             ) : (
-              "Register"
+              "Log In"
             )}
           </button>
         </form>
 
         <p className="mt-6 text-center text-white/70 text-sm">
-          Already have an account?{" "}
-          <a href="/login" className="text-cyan-400 hover:underline">
-            Log in
+          Don&apos;t have an account?{" "}
+          <a href="/register" className="text-cyan-400 hover:underline">
+            Register
           </a>
         </p>
       </div>

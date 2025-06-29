@@ -7,16 +7,18 @@ import SignUpForm from "./pages/signup";
 import WhyInvestWithUs from "./pages/whyus";
 import Footer from "./pages/footer";
 import Register from "./pages/register";
+import PropertySection from "./components/PropertySection";
+import Login from "./pages/login";
 
 
 function MainSite() {
   return (
     <>
       <Header />
-      <WhyInvestWithUs />
+      <PropertySection />
       <ProductsAndSolutions />
+      <WhyInvestWithUs />
       <SignUpForm />
-      
       <Footer />
     </>
   );
@@ -27,6 +29,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<MainSite />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/about" element={<ComingSoon />} />
         <Route path="/products-services" element={<ComingSoon />} />
         <Route path="/contact-us" element={<ComingSoon />} />

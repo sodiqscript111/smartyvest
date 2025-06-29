@@ -1,91 +1,84 @@
-import {
-  ArrowRight,
-  BookOpen,
-  Calendar,
-  Video,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import type { Variants } from "framer-motion";
-
 import { Link } from "react-router-dom";
 
-const cardData = [
+const productCards = [
   {
-    title: "Learn | Save | Invest",
-    icon: BookOpen,
-    description: "All our upcoming events for the month of October to December",
+    title: "Real Estate",
+    description: "Invest in fractional properties and earn passive income.",
+    extra:
+      "With access to high-yield rental income and long-term property appreciation, our real estate product is designed for steady, secure growth.",
+    image: "https://i.ibb.co/RTSn2gtC/Image-fx-74.png",
   },
   {
-    title: "Smarty Central",
-    icon: Calendar,
-    description: "Recommended courses, curated just for you!",
+    title: "Loan",
+    description: "Access low-interest loans secured by your savings or assets.",
+    extra:
+      "We offer transparent repayment plans, fast approval, and a system designed to ensure financial discipline while supporting your goals.",
+    image: "https://i.ibb.co/xqNC81xp/Gemini-Generated-Image-oaj6kpoaj6kpoaj6.png",
   },
   {
-    title: "All available lesson recordings",
-    icon: Video,
-    description: "",
+    title: "Savings",
+    description: "Smart saving options tailored for long-term goals.",
+    extra:
+      "Whether you're saving for education, travel, or retirement, our saving plans adapt to your lifestyle and keep your goals in sight.",
+    image: "https://i.ibb.co/S716RpQg/Image-fx-72.png",
   },
 ];
 
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.2,
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  }),
-};
-
 export default function ProductsAndSolutions() {
   return (
-    <section className="bg-[#f4fbfd] py-24 px-6 text-gray-800">
-      <div className="container mx-auto space-y-16">
-        {/* Section Header */}
-        <div className="text-center max-w-4xl mx-auto space-y-4">
-          <p className="text-sm font-semibold uppercase tracking-widest text-[#4faee4]">
-            Products and solutions
-          </p>
-          <h2 className="text-4xl md:text-3xl font-extrabold leading-tight">
-            Providing transformational solutions for <br className="hidden md:block" />
-            Africa's unique challenges
-          </h2>
-        </div>
+    <section className="w-full bg-[#f4fbfd] py-24 px-6 text-gray-800 font-poppins">
+      {/* Hero */}
+      <div className="max-w-5xl mx-auto text-center space-y-6">
+        <p className="text-sm font-semibold uppercase tracking-widest text-[#4faee4]">
+          Products and Solutions
+        </p>
+        <h2 className="text-[48px] md:text-[48px] font-normal leading-tight">
+          Providing transformational solutions for Africa's unique challenges
+        </h2>
+        <Link
+          to="/products"
+          className="inline-flex items-center gap-2 text-[#4faee4] hover:underline text-base font-semibold"
+        >
+          Explore our products <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
 
-        {/* Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {cardData.map((card, index) => (
-            <motion.div
-              key={index}
-              custom={index}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={cardVariants}
-              className="bg-white rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 p-8 flex flex-col gap-6"
-            >
-              <div className="flex items-center gap-3">
-                <card.icon className="text-[#4faee4] w-7 h-7" />
-                <h3 className="text-xl font-semibold">{card.title}</h3>
-              </div>
-              {card.description && (
-                <p className="text-base leading-relaxed text-gray-600">
-                  {card.description}
-                </p>
-              )}
-
+      {/* Cards */}
+      <div className="mt-20 space-y-10 flex flex-col items-center">
+        {productCards.map((card, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
+            className="w-[80%] bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col md:flex-row overflow-hidden"
+          >
+            {/* Left: Text */}
+            <div className="flex-1 p-6 space-y-3 flex flex-col justify-center">
+              <h3 className="text-2xl font-bold text-gray-900">{card.title}</h3>
+              <p className="text-gray-700 text-base font-medium">{card.description}</p>
+              <p className="text-gray-600 text-sm leading-relaxed">{card.extra}</p>
               <Link
                 to="/coming-soon"
-                className="mt-auto text-[#4faee4] hover:underline flex items-center gap-1 text-sm font-medium"
+                className="mt-3 inline-flex items-center gap-1 text-[#4faee4] text-sm font-medium hover:underline"
               >
-                Coming Soon <ArrowRight className="w-4 h-4" />
+                Learn more <ArrowRight className="w-4 h-4" />
               </Link>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+
+            {/* Right: Image */}
+            <div className="md:w-1/2 w-full h-38 md:h-[340px] ">
+              <img
+                src={card.image}
+                alt={card.title}
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );

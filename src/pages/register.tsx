@@ -1,6 +1,6 @@
-"use client";
-import { useState } from "react";
-import type { ChangeEvent, FormEvent } from "react";
+import  { useState} from "react";
+import type {  ChangeEvent, FormEvent  } from "react";
+import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, CheckCircle, XCircle, Loader2 } from "lucide-react";
 
 interface FormData {
@@ -28,7 +28,8 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<Message>({ type: "", text: "" });
-  const [token, setToken] = useState<string>("");
+
+  const navigate = useNavigate();
 
   const togglePassword = () => setShowPassword((prev) => !prev);
 
@@ -41,7 +42,6 @@ export default function Register() {
     e.preventDefault();
     setIsLoading(true);
     setMessage({ type: "", text: "" });
-    setToken("");
 
     try {
       const response = await fetch(
@@ -58,10 +58,15 @@ export default function Register() {
       const data = await response.json();
 
       if (response.ok) {
+        if (data.token) {
+          localStorage.setItem("authToken", data.token);
+        }
+
         setMessage({
           type: "success",
-          text: "Registration successful! Welcome to SmartyVest!",
+          text: "Registration successful! Redirecting to dashboard...",
         });
+
         setForm({
           first_name: "",
           surname: "",
@@ -70,11 +75,10 @@ export default function Register() {
           phone: "",
         });
 
-        // Store token if available
-        if (data.token) {
-          localStorage.setItem("authToken", data.token);
-          setToken(data.token);
-        }
+        // Redirect after short delay to show message
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 1500);
       } else {
         setMessage({
           type: "error",
@@ -117,17 +121,10 @@ export default function Register() {
           </div>
         )}
 
-        {/* Show token for inspection */}
-        {token && (
-          <div className="mb-4 p-3 rounded-lg bg-blue-700/30 border border-blue-500 text-blue-100 break-all text-xs font-mono">
-            <strong>Your Token:</strong>
-            <pre className="select-all mt-1">{token}</pre>
-          </div>
-        )}
-
         <form
           onSubmit={handleSubmit}
           className="space-y-5 text-sm sm:text-base text-white"
+          noValidate
         >
           <div>
             <label className="block mb-1 font-medium">First Name</label>
@@ -190,7 +187,11 @@ export default function Register() {
               disabled={isLoading}
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
-              {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+              {showPassword ? (
+                <EyeOff className="w-5 h-5" />
+              ) : (
+                <Eye className="w-5 h-5" />
+              )}
             </button>
           </div>
 

@@ -9,6 +9,7 @@ import Footer from "./pages/footer";
 import Register from "./pages/register";
 import PropertySection from "./components/PropertySection";
 import Login from "./pages/login";
+import Dashboard from "./pages/dashboard";
 
 
 function MainSite() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/register" element={<Register/>}/>
         {/* fallback route (optional) */}
         <Route path="*" element={<ComingSoon />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );

@@ -1,7 +1,7 @@
-"use client";
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { Eye, EyeOff, CheckCircle, XCircle, Loader2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface LoginFormData {
   email: string;
@@ -22,7 +22,8 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<Message>({ type: "", text: "" });
-  const [token, setToken] = useState<string>("");
+
+  const navigate = useNavigate();
 
   const togglePassword = () => setShowPassword((prev) => !prev);
 
@@ -35,7 +36,6 @@ export default function Login() {
     e.preventDefault();
     setIsLoading(true);
     setMessage({ type: "", text: "" });
-    setToken("");
 
     try {
       const response = await fetch(
@@ -50,12 +50,13 @@ export default function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage({ type: "success", text: "Login successful! Welcome back!" });
+        setMessage({ type: "success", text: "Login successful! Redirecting..." });
         setForm({ email: "", password: "" });
 
         if (data.token) {
           localStorage.setItem("authToken", data.token);
-          setToken(data.token);
+          // Navigate to dashboard after successful login
+          navigate("/dashboard");
         }
       } else {
         setMessage({
@@ -96,14 +97,6 @@ export default function Login() {
               <XCircle className="w-5 h-5 text-red-400" />
             )}
             <span className="text-sm">{message.text}</span>
-          </div>
-        )}
-
-        {/* Show token for inspection */}
-        {token && (
-          <div className="mb-4 p-3 rounded-lg bg-blue-700/30 border border-blue-500 text-blue-100 break-all text-xs font-mono">
-            <strong>Your Token:</strong>
-            <pre className="select-all mt-1">{token}</pre>
           </div>
         )}
 

@@ -1,6 +1,6 @@
-import  { useState} from "react";
-import type {  ChangeEvent, FormEvent  } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import type { ChangeEvent, FormEvent } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { Eye, EyeOff, CheckCircle, XCircle, Loader2 } from "lucide-react";
 
 interface FormData {
@@ -48,9 +48,7 @@ export default function Register() {
         "https://smartyvest-fzdscdgegme8h5hk.canadacentral-01.azurewebsites.net/register",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(form),
         }
       );
@@ -75,7 +73,6 @@ export default function Register() {
           phone: "",
         });
 
-        // Redirect after short delay to show message
         setTimeout(() => {
           navigate("/dashboard");
         }, 1500);
@@ -103,7 +100,6 @@ export default function Register() {
           Create an Account
         </h2>
 
-        {/* Message Display */}
         {message.text && (
           <div
             className={`mb-4 p-3 rounded-lg flex items-center gap-2 ${
@@ -227,9 +223,9 @@ export default function Register() {
 
         <p className="mt-6 text-center text-white/70 text-sm">
           Already have an account?{" "}
-          <a href="/login" className="text-cyan-400 hover:underline">
+          <Link to="/login" className="text-cyan-400 hover:underline">
             Log in
-          </a>
+          </Link>
         </p>
       </div>
     </section>
